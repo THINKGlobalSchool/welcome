@@ -78,13 +78,13 @@ $step1_link = elgg_view('output/url', array(
 	));
 
 $step2_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . 'pg/profile/edit/' . $user->username,
+	'href' => elgg_get_site_url() . "pg/profile/{$user->username}/edit/icon",
 	'text' => elgg_echo('welcome:checklist:step2'),
 	'class' => $avatar ? 'strikeout' : ''
 	));
 	
 $step3_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . 'pg/profile/' . $user->username . '/edit',
+	'href' => elgg_get_site_url() . "pg/profile/{$user->username}/edit/details",
 	'text' => elgg_echo('welcome:checklist:step3'),
 	'class' => $profile ? 'strikeout' : ''
 	));
