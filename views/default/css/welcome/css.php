@@ -28,4 +28,31 @@
 	text-decoration: line-through;
 }
 
+/** Tinybox **/
+#tinybox {
+	position:absolute; 
+	display:none; 
+	padding:10px; 
+/**	background: #fff url(<?php echo elgg_get_site_url().'mod/activityper/images/'?>preload.gif) no-repeat 50% 50%; **/
+	background: #fff;
+	border:10px solid #e3e3e3; 
+	z-index:9999;
+}
+
+#tinymask {
+	position: absolute; 
+	display: none; 
+	top: 0; 
+	left: 0; 
+	height: 100%; 
+	width: 100%; 
+	background: #000; 
+	z-index: 9998;
+
+}
+
+#tinycontent {
+	background: #fff;
+}
+
 /**</style>**/

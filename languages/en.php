@@ -25,6 +25,8 @@ $english = array(
 	
 	// Labels
 	'welcome:label:introentity' => 'Checklist intro entity guid',
+	'welcome:label:popupcontent' => 'Content to appear in modal popup',
+	'welcome:label:previewpopup' => 'Preview Popup',
 	
 	// Messages
 	'welcome:error:dismiss' => 'There was an error dismissing this message',

@@ -20,17 +20,61 @@ function welcome_init() {
 	
 	// Debug..
 	//welcome_reset_all();
-
+	
 	// Extend sidebar (by extending owner_block.. this is because pre 1.8 is gross)
 	elgg_extend_view('page_elements/owner_block','welcome/sidebar', 500);
 	
 	// Extend CSS
 	elgg_extend_view('css/screen', 'css/welcome/css');
+	elgg_extend_view('css/admin', 'css/welcome/css');
+	elgg_extend_view('css/admin', 'embed/css');
 	
+	// Page handler
+	register_page_handler('welcome', 'welcome_page_handler');
+
 	// Actions
 	$action_base = elgg_get_plugin_path() . 'welcome/actions/welcome';
 	elgg_register_action('welcome/dismiss' , "$action_base/dismiss.php");
 	elgg_register_action('welcome/view' , "$action_base/view.php");
 }
 
+/**
+ * Pagesetup hook, only for JS
+ */
+function welcome_pagesetup() {
+	// Register Tinybox JS (might not need this in 1.8)
+	elgg_register_js(elgg_get_site_url() . 'mod/welcome/vendors/tinybox/tinybox.js', 'tinybox');
+	
+	if (get_context() == 'admin') {
+		// Register Welcome admin JS
+		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/admin.php', 'elgg.welcome.admin');
+	} else {
+		// Register Welcome JS
+		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/welcome.php', 'elgg.welcome');
+	}	
+}
+
+/**
+ * Welcome page handler
+ * - Dispatches welcome pages
+ */
+function welcome_page_handler($page) {
+	$page_type = $page[0];
+
+	switch($page_type) {
+		case 'loadpopup':
+			echo elgg_view('welcome/popup');
+			exit;
+			break;
+		default: 
+			// Do nothing..
+			forward();
+			break;
+	}
+	
+	return true;
+}
+
+
 elgg_register_event_handler('init', 'system', 'welcome_init');
+elgg_register_event_handler('pagesetup', 'system', 'welcome_pagesetup');
