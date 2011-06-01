@@ -12,6 +12,7 @@
  */
 
 $name = get_input('name');
+
 if (!$name || !welcome_dismiss_message($name)) { 
 	$error = elgg_echo('welcome:error:dismiss');
 }
