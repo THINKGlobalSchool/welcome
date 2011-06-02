@@ -10,16 +10,7 @@
  * 
  */
 ?>
-<div>
-    <label><?php echo elgg_echo('welcome:label:introentity'); ?></label>
-    <?php 
-		echo elgg_view('input/text', array(
-			'internalname' => 'params[introentity]', 
-			'value' => $vars['entity']->introentity)
-		); 
-	?>
-</div>
-<br /><br />
+<br />
 <div>
     <label><?php echo elgg_echo('welcome:label:popupcontent'); ?></label><br />
     <?php 

@@ -90,7 +90,7 @@ function welcome_reset_dismissed($user = NULL) {
 }
 
 /**
- * Reset wether a use has viewed the intro item
+ * Reset wether a user has viewed the intro item
  */
 function welcome_reset_introitem($user = NULL) {
 	if (!elgg_instanceof($user, 'user')) {

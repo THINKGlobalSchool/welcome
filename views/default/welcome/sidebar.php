@@ -19,20 +19,25 @@ if (!$user || welcome_is_message_dismissed("checklist") || get_context() == 'adm
 }
 
 // Get intro item from settings
-$intro_item = get_entity(get_plugin_setting('introentity', 'welcome'));
-if (!elgg_instanceof($intro_item, 'object')) {
-  	echo "<br />" . elgg_echo('welcome:error:invalidintroentity') . "<br /><br />";
-	return;
-}
+//$intro_item = get_entity(get_plugin_setting('introentity', 'welcome'));
+//if (!elgg_instanceof($intro_item, 'object')) {
+// 	echo "<br />" . elgg_echo('welcome:error:invalidintroentity') . "<br /><br />";
+//	return;
+//}
 
 // Determine if intro item has been 'viewed'
-if (welcome_has_user_viewed_entity($intro_item)) {
-	$viewed_item = true;
+//if (welcome_has_user_viewed_entity($intro_item)) {
+//	$viewed_item = TRUE;
+//}
+
+// Check if the popup has been dismissed
+if (welcome_is_message_dismissed("welcomepopup")) {
+	$viewed_item = TRUE;
 }
 
 // Determine if avatar is set
 if (!strpos($user->getIcon(),'default')) { 
-	$avatar = true; 
+	$avatar = TRUE; 
 }
 
 // Determine if profile been filled out
@@ -40,7 +45,7 @@ $profile_fields = elgg_get_config('profile'); // Note: this is profile_fields in
 foreach ($profile_fields as $shortname => $valuetype) {
 	if ($user->$shortname) {
 		//we have at least one profile field complete
-		$profile = true;
+		$profile = TRUE;
 		break;
 	}
 }
@@ -55,7 +60,7 @@ $options = array(
 $wire_posts = elgg_get_entities($options);
 // Got at least 1 post, they've posted something
 if ($wire_posts) {
-	$posted = true;
+	$posted = TRUE;
 }
 
 //@todo - dismiss via AJAX
@@ -67,14 +72,15 @@ $close_link = elgg_view('output/confirmlink', array(
 	'class' => 'small right'
 ));
 
-$view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/view?guid={$intro_item->guid}", false);
+$view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/view?guid={$intro_item->guid}", FALSE);
 
 $header = "Getting Started {$close_link}";
 
 $step1_link = elgg_view('output/url', array(
 	'href' => $view_url,
 	'text' => elgg_echo('welcome:checklist:step1'),
-	'class' => $viewed_item ? 'strikeout' : ''
+	'class' => $viewed_item ? 'strikeout' : '',
+	'id' => 'welcome-viewed-video',
 	));
 
 $step2_link = elgg_view('output/url', array(

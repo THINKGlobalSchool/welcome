@@ -37,7 +37,7 @@ elgg.welcome.popup.init = function() {
 				data: {}, 
 				success: function(data) {
 					data = "<a style='float: right;' id='welcome-close-popup' href='#'><strong>[Close]</strong></a><div style='clear: both;'></div>" + data;
-					data += "<a style='float: right;' id='welcome-dismiss-popup' href='welcomepopup'>Don't show again</a><div style='clear: both;'></div>";
+					data += "<span style='float: right;'><strong>Hide forever?</strong>&nbsp;<input id='welcome-dismiss-check' type='checkbox' /></span><div style='clear: both;'></div>";
 
 					TINY.box.show({
 						html: data,
@@ -55,10 +55,18 @@ elgg.welcome.popup.init = function() {
 	
 	// Click handler to close the popup
 	$('#welcome-close-popup').live('click', function() { TINY.box.hide(); });
+	
+	// Handle the change event for the dismiss checkbox
+	$('#welcome-dismiss-check').live('change', function() {
+		if ($(this).is(':checked')) {
+			$(this).parent().html("<input type='submit' id='welcome-dismiss-popup' href='welcomepopup' value='Hide Forever' />");
+		}
+	});
 }
 
 // Function to dismiss a box/popup
 elgg.welcome.popup.dismiss = function(event) {
+	
 	elgg.action('welcome/dismiss', {
 		data: {
 			name: $(this).attr('href'),
@@ -67,6 +75,10 @@ elgg.welcome.popup.dismiss = function(event) {
 			TINY.box.hide();
 		}
 	});
+
+	// Check off the item 
+	$('#welcome-viewed-video').addClass('strikeout');
+	
 	event.preventDefault();
 }
 
