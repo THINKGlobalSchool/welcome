@@ -17,7 +17,7 @@ function welcome_init() {
 
 	// Include helpers
 	require_once 'lib/welcome.php';
-	
+		
 	// Debug..
 	//welcome_reset_all();
 	
@@ -49,8 +49,13 @@ function welcome_pagesetup() {
 		// Register Welcome admin JS
 		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/admin.php', 'elgg.welcome.admin');
 	} else {
-		// Register Welcome JS
-		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/welcome.php', 'elgg.welcome');
+		// Only load the popup JS once per session
+		if (!isset($_SESSION['welcome_popup']) && isloggedin()) {
+			// Register Welcome JS popup
+			elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/popup.php', 'elgg.welcome.popup');
+			// Set session
+			$_SESSION['welcome_popup'] = true;
+		}
 	}	
 }
 

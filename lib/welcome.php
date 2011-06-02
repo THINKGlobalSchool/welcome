@@ -42,7 +42,7 @@ function welcome_dismiss_message($name) {
 function welcome_is_message_dismissed($name) {
 	$user = get_loggedin_user();
 	$items = unserialize($user->welcome_dismissed);
-	
+
 	if ($items[$name]) {
 		return true;
 	} else {
@@ -80,7 +80,10 @@ function welcome_reset_dismissed($user = NULL) {
 	if (!elgg_instanceof($user, 'user')) {
 		$user = get_loggedin_user();
 	}
-	$user->welcome_dismissed = serialize(array());
+	//$user->welcome_dismissed = serialize(array());
+	
+	remove_metadata($user->guid, 'welcome_dismissed');
+	
 	return $user->save();
 }
 
@@ -100,6 +103,10 @@ function welcome_reset_introitem($user = NULL) {
  * Wrapper to reset all welcome data
  */
 function welcome_reset_all($user = NULL) {
+	// Clear dismissed
 	welcome_reset_dismissed($user);
+	// Clear introitem relationship
 	welcome_reset_introitem($user);
+	// Nuke session
+	unset($_SESSION['welcome_popup']);
 }
