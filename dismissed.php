@@ -22,7 +22,6 @@ if (isadminloggedin()) {
 		
 		echo "</pre>";
 	}	
+} else {
+	forward();
 }
-
-forward();
-

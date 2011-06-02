@@ -44,7 +44,6 @@ if (isadminloggedin()) {
 			echo "Dismissed: " . $user->username . "</br>";
 		}
 	}	
+} else {
+	forward();
 }
-
-forward();
-
