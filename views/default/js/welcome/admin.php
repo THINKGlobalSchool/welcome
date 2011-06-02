@@ -14,6 +14,8 @@
 
 elgg.provide('elgg.welcome.admin');
 
+elgg.welcome.admin.popupURL = 'pg/welcome/loadpopup';
+
 // Init function
 elgg.welcome.admin.init = function() {
 	
@@ -27,7 +29,23 @@ elgg.welcome.admin.preview_popup = function(event) {
 	} else {
 		var content = $("#popupcontent").val();
 	}
-	TINY.box.show(content,0,0,0,1);
+	
+	// Load
+	elgg.get(elgg.welcome.admin.popupURL, {
+		data: {preview: content}, 
+		success: function(data) {
+			data = "<a style='float: right;' onclick='TINY.box.hide();' id='welcome-close-popup' href='#'><strong>[Close]</strong></a><div style='clear: both;'></div>" + data;
+			data += "<a style='float: right;' id='welcome-dismiss-popup' href='welcomepopup'></a><div style='clear: both;'></div>";
+			
+			TINY.box.show({
+				html: data,
+				animate: true,
+				mask: true,
+				top: 100,
+			});
+		},
+	});
+	
 	event.preventDefault();
 }
 

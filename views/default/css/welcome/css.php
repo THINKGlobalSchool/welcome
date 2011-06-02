@@ -29,15 +29,15 @@
 }
 
 /** Tinybox **/
-#tinybox {
-	position:absolute; 
-	display:none; 
+.tbox {
 	padding:10px; 
 /**	background: #fff url(<?php echo elgg_get_site_url().'mod/activityper/images/'?>preload.gif) no-repeat 50% 50%; **/
 	background: #fff;
 	border:10px solid #e3e3e3; 
 	z-index:9999;
 }
+
+.tmask {position:absolute; display:none; top:0px; left:0px; height:100%; width:100%; background:#000; z-index:9998}
 
 #tinymask {
 	position: absolute; 

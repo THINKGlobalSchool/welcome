@@ -38,10 +38,15 @@ elgg.welcome.popup.init = function() {
 				success: function(data) {
 					data = "<a style='float: right;' id='welcome-close-popup' href='#'><strong>[Close]</strong></a><div style='clear: both;'></div>" + data;
 					data += "<a style='float: right;' id='welcome-dismiss-popup' href='welcomepopup'>Don't show again</a><div style='clear: both;'></div>";
-					
-					TINY.box.show(data,0,0,0,1);
+
+					TINY.box.show({
+						html: data,
+						animate: true,
+						mask: true,
+						top: 100,
+					});
 				},
-			})
+			});
 		});
 	}
 	

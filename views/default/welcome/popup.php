@@ -11,6 +11,14 @@
  * 
  */
 
-echo elgg_view('output/longtext', array(
-	'value' => get_plugin_setting('popupcontent', 'welcome'),
+if ($vars['content']) {
+	$content = $vars['content'];
+} else {
+	$content = get_plugin_setting('popupcontent', 'welcome');
+}
+
+$popup =  elgg_view('output/longtext', array(
+	'value' => $content,
 ));
+
+echo ecml_parse_string($content);

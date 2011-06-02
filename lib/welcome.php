@@ -77,14 +77,16 @@ function welcome_has_user_viewed_entity($entity, $user = NULL) {
  * @return bool
  */
 function welcome_reset_dismissed($user = NULL) {
-	if (!elgg_instanceof($user, 'user')) {
-		$user = get_loggedin_user();
+	if (isloggedin()) {
+		if (!elgg_instanceof($user, 'user')) {
+			$user = get_loggedin_user();
+		}
+		//$user->welcome_dismissed = serialize(array());
+	
+		remove_metadata($user->guid, 'welcome_dismissed');
+	
+		return $user->save();
 	}
-	//$user->welcome_dismissed = serialize(array());
-	
-	remove_metadata($user->guid, 'welcome_dismissed');
-	
-	return $user->save();
 }
 
 /**

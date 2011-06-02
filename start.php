@@ -36,6 +36,9 @@ function welcome_init() {
 	$action_base = elgg_get_plugin_path() . 'welcome/actions/welcome';
 	elgg_register_action('welcome/dismiss' , "$action_base/dismiss.php");
 	elgg_register_action('welcome/view' , "$action_base/view.php");
+	
+	// Register the popup with ECML
+	elgg_register_plugin_hook_handler('get_views', 'ecml', 'welcome_ecml_views_hook');
 }
 
 /**
@@ -68,7 +71,7 @@ function welcome_page_handler($page) {
 
 	switch($page_type) {
 		case 'loadpopup':
-			echo elgg_view('welcome/popup');
+			echo elgg_view('welcome/popup', array('content' => get_input('preview', FALSE)));
 			exit;
 			break;
 		default: 
@@ -80,6 +83,14 @@ function welcome_page_handler($page) {
 	return true;
 }
 
+/**
+ * Parse popup for ECML
+ */
+function welcome_ecml_views_hook($hook, $entity_type, $return_value, $params) {
+	$return_value['welcome/popup'] = elgg_echo('welcome');
+
+	return $return_value;
+}
 
 elgg_register_event_handler('init', 'system', 'welcome_init');
 elgg_register_event_handler('pagesetup', 'system', 'welcome_pagesetup');
