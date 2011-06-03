@@ -52,7 +52,10 @@ function welcome_pagesetup() {
 		// Register Welcome admin JS
 		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/admin.php', 'elgg.welcome.admin');
 	} else {
-		// Only load the popup JS once per session
+		// Register general popup JS
+		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/welcome.php', 'elgg.welcome');
+		
+		// Only autoload the popup JS once per session
 		if (!isset($_SESSION['welcome_popup']) && isloggedin()) {
 			// Register Welcome JS popup
 			elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/popup.php', 'elgg.welcome.popup');

@@ -94,12 +94,8 @@ $step3_link = elgg_view('output/url', array(
 	'text' => elgg_echo('welcome:checklist:step3'),
 	'class' => $profile ? 'strikeout' : ''
 	));
-
-$step4_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . 'pg/activity',
-	'text' => elgg_echo('welcome:checklist:step4'),
-	'class' => $posted ? 'strikeout' : ''
-	));
+	
+$step4_text = "<span class='" . ($posted ? 'strikeout' : "") . "'>" . elgg_echo('welcome:checklist:step4') . "</span>";
 		
 $message = elgg_echo('welcome:checklist:message');	
 		
@@ -111,7 +107,7 @@ $content = <<<HTML
 			<li>$step1_link</li>
 			<li>$step2_link</li>
 			<li>$step3_link</li>
-			<li>$step4_link</li>
+			<li>$step4_text</li>
 		</ol>
 	</div>
 HTML;
