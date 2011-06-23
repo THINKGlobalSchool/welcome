@@ -15,47 +15,26 @@
 
 elgg.provide('elgg.welcome');
 
-elgg.welcome.popupURL = 'pg/welcome/loadpopup';
-
 // Init function
 elgg.welcome.init = function() {	
-	
+	// Admin lightbox
+	$('.welcome-admin-lightbox').live('mouseover', function() {
+		if (typeof(tinyMCE) !== 'undefined') {
+			var content = tinyMCE.getInstanceById('popupcontent').getContent();
+		} else {
+			var content = $("#popupcontent").val();
+		}		
+		$('#preview-data').html(content);
+	});
+
 	// Click handler to dimiss the popup
 	$('#welcome-dismiss-popup').live('click', elgg.welcome.dismissPopup);
-	
-	// Click handler to close the popup
-	$('#welcome-close-popup').live('click', function() { TINY.box.hide(); });
-	
-	// Click handler for intro checklist item, shows the popup
-	$('#welcome-viewed-video').live('click', function(event) {
-		elgg.welcome.showPopup();
-		event.preventDefault();
-	});
 	
 	// Handle the change event for the dismiss checkbox
 	$('#welcome-dismiss-check').live('change', function() {
 		if ($(this).is(':checked')) {
-			$(this).parent().html("<input type='submit' id='welcome-dismiss-popup' href='welcomepopup' value='Do not show on next login' />");
+			$(this).parent().html("<input class='elgg-button elgg-button-action' type='submit' id='welcome-dismiss-popup' href='welcomepopup' value='Do not show on next login' />");
 		}
-	});
-}
-
-// Show the popup
-elgg.welcome.showPopup = function() {
-	// Load
-	elgg.get(elgg.welcome.popupURL, {
-		data: {}, 
-		success: function(data) {
-			data = "<a style='float: right;' id='welcome-close-popup' href='#'><strong>[Close]</strong></a><div style='clear: both;'></div>" + data;
-			data += "<span style='float: right;'><strong>Do not show on next login?</strong>&nbsp;<input id='welcome-dismiss-check' type='checkbox' /></span><div style='clear: both;'></div>";
-
-			TINY.box.show({
-				html: data,
-				animate: true,
-				mask: true,
-				top: 100,
-			});
-		},
 	});
 }
 
@@ -67,15 +46,15 @@ elgg.welcome.dismissPopup = function(event) {
 			name: $(this).attr('href'),
 		},
 		success: function(json) {
-			TINY.box.hide();
+			// Close fancybox
+			$.fancybox.close();
 		}
 	});
 
 	// Check off the item 
-	$('#welcome-viewed-video').addClass('strikeout');
-	
+	$('.welcome-lightbox').addClass('strikeout');
 	event.preventDefault();
 }
 
-elgg.register_event_handler('init', 'system', elgg.welcome.init);
+elgg.register_hook_handler('init', 'system', elgg.welcome.init);
 //</script>

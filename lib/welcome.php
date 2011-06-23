@@ -17,7 +17,7 @@
  * @return bool
  */
 function welcome_dismiss_message($name) {
-	$user = get_loggedin_user();
+	$user = elgg_get_logged_in_user_entity();
 	
 	if ($user->welcome_dismissed) {
 		$items = unserialize($user->welcome_dismissed);
@@ -40,7 +40,7 @@ function welcome_dismiss_message($name) {
  * @return bool
  */
 function welcome_is_message_dismissed($name) {
-	$user = get_loggedin_user();
+	$user = elgg_get_logged_in_user_entity();
 	$items = unserialize($user->welcome_dismissed);
 
 	if ($items[$name]) {
@@ -63,7 +63,7 @@ function welcome_has_user_viewed_entity($entity, $user = NULL) {
 	}
 	
 	if (!elgg_instanceof($user, 'user')) {
-		$user = get_loggedin_user();
+		$user = elgg_get_logged_in_user_entity();
 	}
 	
 	return check_entity_relationship($user->guid, 'has_viewed_welcome_item', $entity->guid);
@@ -77,9 +77,9 @@ function welcome_has_user_viewed_entity($entity, $user = NULL) {
  * @return bool
  */
 function welcome_reset_dismissed($user = NULL) {
-	if (isloggedin()) {
+	if (elgg_is_logged_in()) {
 		if (!elgg_instanceof($user, 'user')) {
-			$user = get_loggedin_user();
+			$user = elgg_get_logged_in_user_entity();
 		}
 		//$user->welcome_dismissed = serialize(array());
 	
@@ -94,7 +94,7 @@ function welcome_reset_dismissed($user = NULL) {
  */
 function welcome_reset_introitem($user = NULL) {
 	if (!elgg_instanceof($user, 'user')) {
-		$user = get_loggedin_user();
+		$user = elgg_get_logged_in_user_entity();
 	}
 	// Get intro item from settings
 	$intro_item = get_entity(get_plugin_setting('introentity', 'welcome'));

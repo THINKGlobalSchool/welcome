@@ -13,7 +13,7 @@
 
 $item = get_entity(get_input('guid'));
 
-$user = get_loggedin_user();
+$user = elgg_get_logged_in_user_entity();
 
 if (elgg_instanceof($user, 'user') && elgg_instanceof($item, 'object')) {
 	// Add relationship and forward to the item

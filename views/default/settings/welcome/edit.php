@@ -15,11 +15,12 @@
     <label><?php echo elgg_echo('welcome:label:popupcontent'); ?></label><br />
     <?php 
 		echo elgg_view('input/longtext', array(
-			'internalid' => 'popupcontent',
-			'internalname' => 'params[popupcontent]', 
+			'id' => 'popupcontent',
+			'name' => 'params[popupcontent]', 
 			'value' => $vars['entity']->popupcontent)
 		); 
 	?>
 	<br />
-	<a href='#' id='welcome-preview-button'><?php echo elgg_echo('welcome:label:previewpopup'); ?></a>
+	<a href='#preview-data' class='elgg-lightbox welcome-admin-lightbox'><?php echo elgg_echo('welcome:label:previewpopup'); ?></a>
+	<div style='display: none;'><div id='preview-data'></div></div>
 </div>

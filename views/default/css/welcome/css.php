@@ -28,31 +28,14 @@
 	text-decoration: line-through;
 }
 
-/** Tinybox **/
-.tbox {
-	padding:10px; 
-/**	background: #fff url(<?php echo elgg_get_site_url().'mod/activityper/images/'?>preload.gif) no-repeat 50% 50%; **/
-	background: #fff;
-	border:10px solid #e3e3e3; 
-	z-index:9999;
+#welcome-sidebar ol {
+	list-style: decimal inside none;
 }
 
-.tmask {position:absolute; display:none; top:0px; left:0px; height:100%; width:100%; background:#000; z-index:9998}
-
-#tinymask {
-	position: absolute; 
-	display: none; 
-	top: 0; 
-	left: 0; 
-	height: 100%; 
-	width: 100%; 
-	background: #000; 
-	z-index: 9998;
-
+.welcome-lightbox-controls {
+	width: 98%; 
+	padding-top: 5px;
+	padding-bottom: 5px; 
+	text-align: right;
 }
-
-#tinycontent {
-	background: #fff;
-}
-
 /**</style>**/

@@ -14,11 +14,11 @@
 if ($vars['content']) {
 	$content = $vars['content'];
 } else {
-	$content = get_plugin_setting('popupcontent', 'welcome');
+	$content = elgg_get_plugin_setting('popupcontent', 'welcome');
 }
 
-$popup =  elgg_view('output/longtext', array(
-	'value' => $content,
-));
+$content .= "<div class='welcome-lightbox-controls'><strong>Do not show on next login?</strong>&nbsp;<input id='welcome-dismiss-check' type='checkbox' /></div>";
 
-echo ecml_parse_string($content);
+echo $content;
+
+//echo ecml_parse_string($content);

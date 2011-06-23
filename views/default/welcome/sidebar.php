@@ -11,7 +11,7 @@
  * 
  */
 
-$user = get_loggedin_user();
+$user = elgg_get_logged_in_user_entity();
 
 // Check if we have a user or that the checklist has been dismissed
 if (!$user || welcome_is_message_dismissed("checklist") || get_context() == 'admin') {
@@ -41,7 +41,7 @@ if (!strpos($user->getIcon(),'default')) {
 }
 
 // Determine if profile been filled out
-$profile_fields = elgg_get_config('profile'); // Note: this is profile_fields in >= 1.8
+$profile_fields = elgg_get_config('profile_fields'); 
 foreach ($profile_fields as $shortname => $valuetype) {
 	if ($user->$shortname) {
 		//we have at least one profile field complete
@@ -77,20 +77,20 @@ $view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/
 $header = "Getting Started {$close_link}";
 
 $step1_link = elgg_view('output/url', array(
-	'href' => $view_url,
+	'href' => elgg_get_site_url() . 'welcome/loadpopup',
 	'text' => elgg_echo('welcome:checklist:step1'),
-	'class' => $viewed_item ? 'strikeout' : '',
-	'id' => 'welcome-viewed-video',
+	'class' => 'welcome-lightbox elgg-lightbox' . ($viewed_item ? ' strikeout' : ''),
+	//'id' => 'welcome-viewed-video',
 	));
 
 $step2_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . "pg/profile/{$user->username}/edit/icon",
+	'href' => elgg_get_site_url() . "profile/{$user->username}/edit/icon",
 	'text' => elgg_echo('welcome:checklist:step2'),
 	'class' => $avatar ? 'strikeout' : ''
 	));
 	
 $step3_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . "pg/profile/{$user->username}/edit/details",
+	'href' => elgg_get_site_url() . "profile/{$user->username}/edit/details",
 	'text' => elgg_echo('welcome:checklist:step3'),
 	'class' => $profile ? 'strikeout' : ''
 	));
@@ -100,16 +100,15 @@ $step4_text = "<span class='" . ($posted ? 'strikeout' : "") . "'>" . elgg_echo(
 $message = elgg_echo('welcome:checklist:message');	
 		
 $content = <<<HTML
-	<div id='welcome-sidebar'>
-		<h3>$header</h3>
-		<p>$message</p>
+		$message<br /><br />
 		<ol>
 			<li>$step1_link</li>
 			<li>$step2_link</li>
 			<li>$step3_link</li>
 			<li>$step4_text</li>
 		</ol>
-	</div>
 HTML;
 
-echo $content;
+
+
+echo elgg_view_module('aside', $header, $content, array('id' => 'welcome-sidebar'));

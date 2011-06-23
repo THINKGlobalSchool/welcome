@@ -15,54 +15,57 @@
  */
 function welcome_init() {
 
-	// Include helpers
-	require_once 'lib/welcome.php';
+	// Register and load library
+	elgg_register_library('welcome', elgg_get_plugins_path() . 'welcome/lib/welcome.php');
+	elgg_load_library('welcome');
 		
 	// Debug..
 	//welcome_reset_all();
 	
-	// Extend sidebar (by extending owner_block.. this is because pre 1.8 is gross)
-	elgg_extend_view('page_elements/owner_block','welcome/sidebar', 500);
+	// Extend Sidebar
+	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar');
 	
 	// Extend CSS
-	elgg_extend_view('css/screen', 'css/welcome/css');
+	elgg_extend_view('css/elgg', 'css/welcome/css');
 	elgg_extend_view('css/admin', 'css/welcome/css');
-	elgg_extend_view('css/admin', 'embed/css');
+	//elgg_extend_view('css/admin', 'embed/css');
 	
 	// Page handler
-	register_page_handler('welcome', 'welcome_page_handler');
+	elgg_register_page_handler('welcome', 'welcome_page_handler');
 
 	// Actions
-	$action_base = elgg_get_plugin_path() . 'welcome/actions/welcome';
+	$action_base = elgg_get_plugins_path() . 'welcome/actions/welcome';
 	elgg_register_action('welcome/dismiss' , "$action_base/dismiss.php");
 	elgg_register_action('welcome/view' , "$action_base/view.php");
 	
 	// Register the popup with ECML
 	elgg_register_plugin_hook_handler('get_views', 'ecml', 'welcome_ecml_views_hook');
+	
+	// Register JS
+	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
+	elgg_register_js('elgg.welcome', $welcome_js);
+
+	$admin_js = elgg_get_simplecache_url('js', 'welcome/admin');
+	elgg_register_js('elgg.welcome.admin', $admin_js);
+	
+	// Load lightbox CSS & JS
+	elgg_load_css('lightbox');
+
+	// Load JS if logged in
+	if (elgg_is_logged_in()) {
+		elgg_load_js('lightbox');
+		elgg_load_js('elgg.welcome');
+	} 
 }
 
 /**
- * Pagesetup hook, only for JS
+ * Pagesetup hook
  */
 function welcome_pagesetup() {
-	// Register Tinybox JS (might not need this in 1.8)
-	elgg_register_js(elgg_get_site_url() . 'mod/welcome/vendors/tinybox/tinybox.js', 'tinybox');
-	
-	if (get_context() == 'admin') {
-		// Register Welcome admin JS
-		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/admin.php', 'elgg.welcome.admin');
-	} else {
-		// Register general popup JS
-		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/welcome.php', 'elgg.welcome');
-		
-		// Only autoload the popup JS once per session
-		if (!isset($_SESSION['welcome_popup']) && isloggedin()) {
-			// Register Welcome JS popup
-			elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/popup.php', 'elgg.welcome.popup');
-			// Set session
-			$_SESSION['welcome_popup'] = true;
-		}
-	}	
+	if (!isset($_SESSION['welcome_popup']) && elgg_is_logged_in() && !welcome_is_message_dismissed('welcomepopup')) {
+		elgg_extend_view('page/elements/footer', 'welcome/autopopup');
+		$_SESSION['welcome_popup'] = TRUE;
+	}
 }
 
 /**
@@ -97,3 +100,4 @@ function welcome_ecml_views_hook($hook, $entity_type, $return_value, $params) {
 
 elgg_register_event_handler('init', 'system', 'welcome_init');
 elgg_register_event_handler('pagesetup', 'system', 'welcome_pagesetup');
+
