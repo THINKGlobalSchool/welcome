@@ -56,7 +56,7 @@ function welcome_pagesetup() {
 		elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/welcome.php', 'elgg.welcome');
 		
 		// Only autoload the popup JS once per session
-		if (!isset($_SESSION['welcome_popup']) && isloggedin()) {
+		if (!isset($_SESSION['welcome_popup']) && isloggedin() && !is_user_parent(get_loggedin_user())) {
 			// Register Welcome JS popup
 			elgg_register_js(elgg_get_site_url() . 'mod/welcome/views/default/js/welcome/popup.php', 'elgg.welcome.popup');
 			// Set session
