@@ -22,7 +22,9 @@ function welcome_init() {
 	//welcome_reset_all();
 	
 	// Extend sidebar (by extending owner_block.. this is because pre 1.8 is gross)
-	elgg_extend_view('page_elements/owner_block','welcome/sidebar', 500);
+	if (!is_user_parent(get_loggedin_user())) {
+		elgg_extend_view('page_elements/owner_block','welcome/sidebar', 500);
+	}
 	
 	// Extend CSS
 	elgg_extend_view('css/screen', 'css/welcome/css');
