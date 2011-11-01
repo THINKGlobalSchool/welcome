@@ -43,9 +43,11 @@ function welcome_init() {
 	
 	// Register JS
 	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
+	elgg_register_simplecache_view('js/welcome/welcome');
 	elgg_register_js('elgg.welcome', $welcome_js);
 
 	$admin_js = elgg_get_simplecache_url('js', 'welcome/admin');
+	elgg_register_simplecache_view('js/welcome/admin');
 	elgg_register_js('elgg.welcome.admin', $admin_js);
 	
 	// Load lightbox CSS & JS
