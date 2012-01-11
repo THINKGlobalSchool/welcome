@@ -2,7 +2,7 @@
 /** Script to dismiss all users except for given array **/
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
-if (isadminloggedin()) {
+if (elgg_is_admin_logged_in()) {
 	$users = elgg_get_entities(array(
 		'types' => array('user'),
 		'limit' => 0, 
@@ -34,7 +34,7 @@ if (isadminloggedin()) {
 			continue;
 		} else {
 			// Dismiss everything for this user
-			remove_metadata($user->guid, 'welcome_dismissed');
+			elgg_delete_metadata(array('guid' => $user->guid, 'metadata_name' => 'welcome_dismissed'));
 			$items = array(
 				'welcomepopup' => TRUE, 
 				'checklist' => TRUE,

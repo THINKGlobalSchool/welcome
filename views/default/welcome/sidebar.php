@@ -14,12 +14,12 @@
 $user = elgg_get_logged_in_user_entity();
 
 // Check if we have a user or that the checklist has been dismissed
-if (!$user || welcome_is_message_dismissed("checklist") || get_context() == 'admin') {
+if (!$user || welcome_is_message_dismissed("checklist") || elgg_get_context() == 'admin') {
 	return;
 }
 
 // Get intro item from settings
-//$intro_item = get_entity(get_plugin_setting('introentity', 'welcome'));
+//$intro_item = get_entity(elgg_get_plugin_setting('introentity', 'welcome'));
 //if (!elgg_instanceof($intro_item, 'object')) {
 // 	echo "<br />" . elgg_echo('welcome:error:invalidintroentity') . "<br /><br />";
 //	return;
@@ -36,7 +36,7 @@ if (welcome_is_message_dismissed("welcomepopup")) {
 }
 
 // Determine if avatar is set
-if (!strpos($user->getIcon(),'default')) { 
+if (!strpos($user->getIconURL(),'default')) { 
 	$avatar = TRUE; 
 }
 

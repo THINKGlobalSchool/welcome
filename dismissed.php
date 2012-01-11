@@ -3,7 +3,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
-if (isadminloggedin()) {
+if (elgg_is_admin_logged_in()) {
 	$users = elgg_get_entities(array(
 		'types' => array('user'),
 		'limit' => 0, 

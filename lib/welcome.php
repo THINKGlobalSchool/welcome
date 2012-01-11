@@ -83,7 +83,7 @@ function welcome_reset_dismissed($user = NULL) {
 		}
 		//$user->welcome_dismissed = serialize(array());
 	
-		remove_metadata($user->guid, 'welcome_dismissed');
+		elgg_delete_metadata(array('guid' => $user->guid, 'metadata_name' => 'welcome_dismissed'));
 	
 		return $user->save();
 	}
@@ -97,7 +97,7 @@ function welcome_reset_introitem($user = NULL) {
 		$user = elgg_get_logged_in_user_entity();
 	}
 	// Get intro item from settings
-	$intro_item = get_entity(get_plugin_setting('introentity', 'welcome'));
+	$intro_item = get_entity(elgg_get_plugin_setting('introentity', 'welcome'));
 	return remove_entity_relationship($user->guid, 'has_viewed_welcome_item', $intro_item->guid);
 }
 
