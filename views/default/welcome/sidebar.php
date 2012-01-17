@@ -95,7 +95,7 @@ $step1_link = elgg_view('output/url', array(
 	));
 
 $step2_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . "profile/{$user->username}/edit/icon",
+	'href' => elgg_get_site_url() . "avatar/edit/{$user->username}",
 	'text' => elgg_echo('welcome:checklist:step2'),
 	'class' => $avatar ? 'strikeout' : ''
 	));
