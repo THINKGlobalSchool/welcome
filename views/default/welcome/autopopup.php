@@ -12,8 +12,11 @@
  */
 ?>
 <script type='text/javascript'>
-	$(function() {
+	welcome_click_video = function() {
 		$('.welcome-lightbox').click();
-	});
+	};
+	
+	// Need to click AFTER elgg is initted
+	elgg.register_hook_handler('ready', 'system', welcome_click_video);
 </script>
 

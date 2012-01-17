@@ -63,13 +63,24 @@ if ($wire_posts) {
 	$posted = TRUE;
 }
 
+// If we're on the home page, use a different module
+if (elgg_in_context('home')) {
+	$type = 'featured';
+	$close_text = 'Close&nbsp;<span class="elgg-icon elgg-icon-delete right"></span>';
+	$close_class = 'right';
+} else {
+	$type = 'aside';
+	$close_text = '[close]';
+	$close_class = 'small right';
+}
+
 //@todo - dismiss via AJAX
 $close_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/welcome/dismiss?name=checklist');
 $close_link = elgg_view('output/confirmlink', array(
 	'href' => $close_url,
-	'text' => '[Close]',
+	'text' => $close_text,
 	'confirm' => elgg_echo('welcome:checklist:dismissconfirm'),
-	'class' => 'small right'
+	'class' => $close_class
 ));
 
 $view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/view?guid={$intro_item->guid}", FALSE);
@@ -109,6 +120,4 @@ $content = <<<HTML
 		</ol>
 HTML;
 
-
-
-echo elgg_view_module('aside', $header, $content, array('id' => 'welcome-sidebar'));
+echo elgg_view_module($type, $header, $content, array('id' => 'welcome-sidebar'));

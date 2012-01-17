@@ -32,6 +32,10 @@
 	list-style: decimal inside none;
 }
 
+#welcome-sidebar.elgg-module-featured > .elgg-head {
+	background: #85161D;
+}
+
 .welcome-lightbox-controls {
 	width: 98%; 
 	padding-top: 5px;

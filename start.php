@@ -20,16 +20,19 @@ function welcome_init() {
 	elgg_load_library('welcome');
 		
 	// Debug..
-	//welcome_reset_all();
+	// welcome_reset_all();
 	
 	// Extend Sidebar
-	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar');
+	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar', 1);
 	
 	// Extend CSS
 	elgg_extend_view('css/elgg', 'css/welcome/css');
 	elgg_extend_view('css/admin', 'css/welcome/css');
 	//elgg_extend_view('css/admin', 'embed/css');
-	
+
+	// Extend tgstheme 'home/content_top' to add checklist to home page
+	elgg_extend_view('tgstheme/home/content_top', 'welcome/sidebar'); 
+
 	// Page handler
 	elgg_register_page_handler('welcome', 'welcome_page_handler');
 
