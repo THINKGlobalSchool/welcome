@@ -13,7 +13,9 @@
 ?>
 <script type='text/javascript'>
 	welcome_click_video = function() {
-		$('.welcome-lightbox').click();
+		$(document).ready(function() {
+			$('.welcome-lightbox').click()
+		});
 	};
 	
 	// Need to click AFTER elgg is initted
