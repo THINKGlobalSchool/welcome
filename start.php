@@ -20,7 +20,7 @@ function welcome_init() {
 	elgg_load_library('welcome');
 		
 	// Debug..
-	// welcome_reset_all();
+	//welcome_reset_all();
 	
 	// Extend Sidebar
 	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar', 1);
@@ -48,10 +48,6 @@ function welcome_init() {
 	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
 	elgg_register_simplecache_view('js/welcome/welcome');
 	elgg_register_js('elgg.welcome', $welcome_js);
-
-	$admin_js = elgg_get_simplecache_url('js', 'welcome/admin');
-	elgg_register_simplecache_view('js/welcome/admin');
-	elgg_register_js('elgg.welcome.admin', $admin_js);
 	
 	// Load lightbox CSS & JS
 	elgg_load_css('lightbox');
@@ -69,6 +65,10 @@ function welcome_init() {
 function welcome_pagesetup() {
 	if (!isset($_SESSION['welcome_popup']) && elgg_is_logged_in() && !welcome_is_message_dismissed('welcomepopup')) {
 		elgg_extend_view('page/elements/footer', 'welcome/autopopup');
+
+		// Extend parentportal to include hidden 
+		elgg_extend_view('parentportal/extend_left', 'welcome/parent_module');
+
 		$_SESSION['welcome_popup'] = TRUE;
 	}
 }

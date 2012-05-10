@@ -29,7 +29,7 @@ elgg.welcome.init = function() {
 
 	// Click handler to dimiss the popup
 	$('#welcome-dismiss-popup').live('click', elgg.welcome.dismissPopup);
-	
+
 	// Handle the change event for the dismiss checkbox
 	$('#welcome-dismiss-check').live('change', function() {
 		if ($(this).is(':checked')) {
@@ -40,7 +40,6 @@ elgg.welcome.init = function() {
 
 // Function to dismiss a box/popup
 elgg.welcome.dismissPopup = function(event) {
-	
 	elgg.action('welcome/dismiss', {
 		data: {
 			name: $(this).attr('href'),
@@ -57,4 +56,3 @@ elgg.welcome.dismissPopup = function(event) {
 }
 
 elgg.register_hook_handler('init', 'system', elgg.welcome.init);
-//</script>

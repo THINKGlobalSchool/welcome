@@ -26,7 +26,14 @@ $english = array(
 	// Labels
 	'welcome:label:introentity' => 'Checklist intro entity guid',
 	'welcome:label:popupcontent' => 'Content to appear in modal popup',
+	'welcome:label:popupcontent_1' => 'Content to appear in role popup #1 (Default popup for all other users)',
+	'welcome:label:popupcontent_2' => 'Content to appear in role popup #2',
+	'welcome:label:popupcontent_parent' => 'Content to appear in parent popup',
 	'welcome:label:previewpopup' => 'Preview Popup',
+	'welcome:label:previewpopup_1' => 'Preview Role Popup #1',
+	'welcome:label:previewpopup_2' => 'Preview Role Popup #2',
+	'welcome:label:previewpopup_parent' => 'Preview Parent Popup',
+//	'welcome:label:welcomeparents' => 'Welcome to Spot',
 	
 	// Messages
 	'welcome:error:dismiss' => 'There was an error dismissing this message',

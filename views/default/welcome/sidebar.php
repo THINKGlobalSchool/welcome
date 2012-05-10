@@ -91,7 +91,6 @@ $step1_link = elgg_view('output/url', array(
 	'href' => elgg_get_site_url() . 'welcome/loadpopup',
 	'text' => elgg_echo('welcome:checklist:step1'),
 	'class' => 'welcome-lightbox elgg-lightbox' . ($viewed_item ? ' strikeout' : ''),
-	//'id' => 'welcome-viewed-video',
 	));
 
 $step2_link = elgg_view('output/url', array(
