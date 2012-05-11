@@ -25,6 +25,9 @@ function welcome_init() {
 	// Extend Sidebar
 	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar', 1);
 	
+	// Extend parent portal
+	elgg_extend_view('parentportal/extend_left', 'welcome/sidebar');
+	
 	// Extend CSS
 	elgg_extend_view('css/elgg', 'css/welcome/css');
 	elgg_extend_view('css/admin', 'css/welcome/css');
@@ -67,7 +70,7 @@ function welcome_pagesetup() {
 		elgg_extend_view('page/elements/footer', 'welcome/autopopup');
 
 		// Extend parentportal to include hidden 
-		elgg_extend_view('parentportal/extend_left', 'welcome/parent_module');
+		//elgg_extend_view('parentportal/extend_left', 'welcome/parent_module');
 
 		$_SESSION['welcome_popup'] = TRUE;
 	}

@@ -64,7 +64,7 @@ if ($wire_posts) {
 }
 
 // If we're on the home page, use a different module
-if (elgg_in_context('home')) {
+if (elgg_in_context('home') || elgg_in_context('parentportal')) {
 	$type = 'featured';
 	$close_text = 'Close&nbsp;<span class="elgg-icon elgg-icon-delete right"></span>';
 	$close_class = 'right';
