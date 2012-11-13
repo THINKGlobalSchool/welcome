@@ -10,7 +10,7 @@
  * 
  */
 
-$popup_url = elgg_get_site_url() . 'welcome/loadpopup';
+$popup_url = elgg_get_site_url() . 'welcome_popup/loadpopup';
 
 $first_popup_label = elgg_echo('welcome:label:popupcontent_1');
 $first_popup_input = elgg_view('input/longtext', array(

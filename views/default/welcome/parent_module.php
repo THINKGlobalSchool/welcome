@@ -11,7 +11,7 @@
  */
 
 echo elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . 'welcome/loadpopup',
+	'href' => elgg_get_site_url() . 'welcome_popup/loadpopup',
 	'text' => elgg_echo('welcome:checklist:step1'),
 	'class' => 'welcome-lightbox elgg-lightbox',
 	'style' => 'display: none;',

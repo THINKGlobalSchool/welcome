@@ -88,7 +88,7 @@ $view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/
 $header = "Getting Started {$close_link}";
 
 $step1_link = elgg_view('output/url', array(
-	'href' => elgg_get_site_url() . 'welcome/loadpopup',
+	'href' => elgg_get_site_url() . 'welcome_popup/loadpopup',
 	'text' => elgg_echo('welcome:checklist:step1'),
 	'class' => 'welcome-lightbox elgg-lightbox' . ($viewed_item ? ' strikeout' : ''),
 	));

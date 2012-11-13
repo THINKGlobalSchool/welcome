@@ -37,7 +37,7 @@ function welcome_init() {
 	elgg_extend_view('tgstheme/home/content_top', 'welcome/sidebar'); 
 
 	// Page handler
-	elgg_register_page_handler('welcome', 'welcome_page_handler');
+	elgg_register_page_handler('welcome_popup', 'welcome_page_handler');
 
 	// Actions
 	$action_base = elgg_get_plugins_path() . 'welcome/actions/welcome';
