@@ -28,6 +28,8 @@ if ($role == $second_role || (!$role && !$user->is_parent && roles_is_member($se
 	$content = elgg_get_plugin_setting('popupcontent_parent', 'welcome');
 }
 
+$content = elgg_view('output/longtext', array('value' => $content));
+
 $content .= "<div class='welcome-lightbox-controls'><strong>Do not show on next login?</strong>&nbsp;<input id='welcome-dismiss-check' type='checkbox' /></div>";
 
 echo $content;
