@@ -34,6 +34,7 @@ $english = array(
 	'welcome:label:previewpopup_2' => 'Preview Role Popup #2',
 	'welcome:label:previewpopup_parent' => 'Preview Parent Popup',
 //	'welcome:label:welcomeparents' => 'Welcome to Spot',
+	'welcome:label:checklistdescription' => 'Checklist Description Text',
 	
 	// Messages
 	'welcome:error:dismiss' => 'There was an error dismissing this message',

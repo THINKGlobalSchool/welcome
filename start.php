@@ -23,10 +23,10 @@ function welcome_init() {
 	//welcome_reset_all();
 	
 	// Extend Sidebar
-	elgg_extend_view('page/elements/sidebar', 'welcome/sidebar', 1);
+	elgg_extend_view('page/elements/sidebar', 'welcome/module', 1);
 	
 	// Extend parent portal
-	elgg_extend_view('parentportal/extend_left', 'welcome/sidebar');
+	elgg_extend_view('parentportal/extend_left', 'welcome/module');
 	
 	// Extend CSS
 	elgg_extend_view('css/elgg', 'css/welcome/css');
@@ -34,7 +34,7 @@ function welcome_init() {
 	//elgg_extend_view('css/admin', 'embed/css');
 
 	// Extend tgstheme 'home/content_top' to add checklist to home page
-	elgg_extend_view('tgstheme/home/content_top', 'welcome/sidebar'); 
+	elgg_extend_view('tgstheme/home/content_top', 'welcome/module'); 
 
 	// Page handler
 	elgg_register_page_handler('welcome_popup', 'welcome_page_handler');

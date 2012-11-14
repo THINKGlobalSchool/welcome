@@ -18,18 +18,6 @@ if (!$user || welcome_is_message_dismissed("checklist") || elgg_get_context() ==
 	return;
 }
 
-// Get intro item from settings
-//$intro_item = get_entity(elgg_get_plugin_setting('introentity', 'welcome'));
-//if (!elgg_instanceof($intro_item, 'object')) {
-// 	echo "<br />" . elgg_echo('welcome:error:invalidintroentity') . "<br /><br />";
-//	return;
-//}
-
-// Determine if intro item has been 'viewed'
-//if (welcome_has_user_viewed_entity($intro_item)) {
-//	$viewed_item = TRUE;
-//}
-
 // Check if the popup has been dismissed
 if (welcome_is_message_dismissed("welcomepopup")) {
 	$viewed_item = TRUE;
@@ -87,36 +75,44 @@ $view_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/welcome/
 
 $header = "Getting Started {$close_link}";
 
-$step1_link = elgg_view('output/url', array(
+// Array to store checklist items
+$items = array();
+
+$items[] = elgg_view('output/url', array(
 	'href' => elgg_get_site_url() . 'welcome_popup/loadpopup',
 	'text' => elgg_echo('welcome:checklist:step1'),
 	'class' => 'welcome-lightbox elgg-lightbox' . ($viewed_item ? ' strikeout' : ''),
-	));
+));
 
-$step2_link = elgg_view('output/url', array(
+$items[] = elgg_view('output/url', array(
 	'href' => elgg_get_site_url() . "avatar/edit/{$user->username}",
 	'text' => elgg_echo('welcome:checklist:step2'),
 	'class' => $avatar ? 'strikeout' : ''
-	));
+));
 	
-$step3_link = elgg_view('output/url', array(
+$items[] = elgg_view('output/url', array(
 	'href' => elgg_get_site_url() . "profile/{$user->username}/edit/details",
 	'text' => elgg_echo('welcome:checklist:step3'),
 	'class' => $profile ? 'strikeout' : ''
-	));
+));
+
+$items[] = "<span class='" . ($posted ? 'strikeout' : "") . "'>" . elgg_echo('welcome:checklist:step4') . "</span>";
+
+// Let plugins customize items
+$items = elgg_trigger_plugin_hook('items', 'welcome', array('context' => elgg_get_context()), $items);
 	
-$step4_text = "<span class='" . ($posted ? 'strikeout' : "") . "'>" . elgg_echo('welcome:checklist:step4') . "</span>";
-		
-$message = elgg_echo('welcome:checklist:message');	
-		
-$content = <<<HTML
-		$message<br /><br />
-		<ol>
-			<li>$step1_link</li>
-			<li>$step2_link</li>
-			<li>$step3_link</li>
-			<li>$step4_text</li>
-		</ol>
-HTML;
+// Get description, fall back to default
+$description = elgg_get_plugin_setting('checklist_description', 'welcome') ? elgg_get_plugin_setting('checklist_description', 'welcome') : elgg_echo('welcome:checklist:message');
+
+$content = "$description<br /><br /><ol>";
+
+foreach ($items as $item) {
+	$content .= "<li>$item</li>";
+}
+
+$content .= "</ol>";
+
+// Allow content to be extended
+$content .= elgg_view('welcome/module_extend');
 
 echo elgg_view_module($type, $header, $content, array('id' => 'welcome-sidebar'));

@@ -12,6 +12,14 @@
 
 $popup_url = elgg_get_site_url() . 'welcome_popup/loadpopup';
 
+$checklist_description_label = elgg_echo('welcome:label:checklistdescription');
+$checklist_description_input = elgg_view('input/text', array(
+	'id' => 'checklist_description',
+	'name' => 'params[checklist_description]', 
+	'value' => $vars['entity']->checklist_description)
+);
+
+
 $first_popup_label = elgg_echo('welcome:label:popupcontent_1');
 $first_popup_input = elgg_view('input/longtext', array(
 	'id' => 'popupcontent_1',
@@ -68,6 +76,10 @@ $parent_preview_link = elgg_view('output/url', array(
 
 $content = <<<HTML
 	<br />
+	<div>
+		<label>$checklist_description_label</label><br />
+		$checklist_description_input
+	</div>
 	<div>
 		<label>$first_popup_label</label><br /><br />
 		$first_role_select
