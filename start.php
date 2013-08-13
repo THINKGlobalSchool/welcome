@@ -5,7 +5,7 @@
  * @package Welcome
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
+ * @copyright THINK Global School 2010 - 2013
  * @link http://www.thinkglobalschool.com/
  * 
  */
@@ -46,12 +46,27 @@ function welcome_init() {
 	
 	// Register the popup with ECML
 	elgg_register_plugin_hook_handler('get_views', 'ecml', 'welcome_ecml_views_hook');
+
+	// Topbar menu hook
+	elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	
 	// Register JS
 	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
 	elgg_register_simplecache_view('js/welcome/welcome');
 	elgg_register_js('elgg.welcome', $welcome_js);
-	
+
+	// Register intro.js css/js
+	$i = elgg_get_simplecache_url('js', 'intro_js');
+	elgg_register_simplecache_view('js/intro_js');
+	elgg_register_js('intro.js', $i);
+
+	$i = elgg_get_simplecache_url('css', 'intro_js');
+	elgg_register_simplecache_view('css/intro_js');
+	elgg_register_css('intro.js', $i);
+
+	elgg_load_js('intro.js');
+	elgg_load_css('intro.js');
+
 	// Load lightbox CSS & JS
 	elgg_load_css('lightbox');
 
@@ -104,6 +119,25 @@ function welcome_ecml_views_hook($hook, $entity_type, $return_value, $params) {
 	$return_value['welcome/popup'] = elgg_echo('welcome');
 
 	return $return_value;
+}
+
+/**
+ * Hook into topbar menu hook and add a new tutorial button
+ */
+function welcome_topbar_menu_handler($hook, $type, $items, $params) {
+	$tut_item = ElggMenuItem::factory(array(
+		'name' => 'nav_tut',
+		'href' => '#',
+		'link_class' => 'elgg-button elgg-button-delete welcome-nav-tutorial-start',
+		'text' => 'What\'s new?' . elgg_view('welcome/tut_js'), 
+		'priority' => 999999,
+	));
+
+	$tut_item->setSection('default');
+
+	$items[] = $tut_item;
+
+	return $items;
 }
 
 elgg_register_event_handler('init', 'system', 'welcome_init');
