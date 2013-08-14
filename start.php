@@ -46,9 +46,6 @@ function welcome_init() {
 	
 	// Register the popup with ECML
 	elgg_register_plugin_hook_handler('get_views', 'ecml', 'welcome_ecml_views_hook');
-
-	// Topbar menu hook
-	elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	
 	// Register JS
 	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
@@ -64,16 +61,20 @@ function welcome_init() {
 	elgg_register_simplecache_view('css/intro_js');
 	elgg_register_css('intro.js', $i);
 
-	elgg_load_js('intro.js');
-	elgg_load_css('intro.js');
-
 	// Load lightbox CSS & JS
 	elgg_load_css('lightbox');
 
-	// Load JS if logged in
+	// Logged in only
 	if (elgg_is_logged_in()) {
+		// Load JS
 		elgg_load_js('lightbox');
 		elgg_load_js('elgg.welcome');
+
+		elgg_load_js('intro.js');
+		elgg_load_css('intro.js');
+
+		// Topbar menu hook
+		elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	} 
 }
 
