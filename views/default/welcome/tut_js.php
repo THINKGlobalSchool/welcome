@@ -34,31 +34,45 @@
 				steps: [
 					{
 						element: document.querySelector('.elgg-page-topbar > .elgg-inner'),
-						intro: "Welcome to the new Spot menu!"
+						intro: "Welcome to the new Spot menu! We have worked hard to streamline getting around and finding what you're looking for. This tour will give you a brief introduction to some of the changes."
 					},
 					{
 						element: document.querySelector('.elgg-menu-item-my-groups > a'),
-						intro: "Hover your mouse here to view your groups",
+						intro: "Hover your mouse here to view your groups. Try it now!",
 						position: 'left'
 					},
 					{
 						element: document.querySelector('.elgg-menu-item-explore > a'),
-						intro: "Hover here to explore Spot content",
+						intro: "The old main menu has been replaced by the Explore menu. Hover your mouse here to explore Spot content.",
 						position: 'left'
 					},
 					{
 						element: document.querySelector('.elgg-menu-item-profile > a'),
-						intro: "Click here to view your profile, or hover for more options",
+						intro: "Click here to view your profile, or hover for more options.",
 						position: 'left'
 					},
 					{
 						element: document.querySelector('.elgg-menu-item-search'),
-						intro: "Better search! Start typing to search for user groups and content!",
+						intro: "Better search! Start typing to quickly search for users, groups and content!",
 						position: 'left'
 					},
 					{
 						element: document.querySelector('.elgg-menu-quickbar'),
-						intro: "These are links to some important groups",
+						intro: "These are quick links to important Spot content.",
+						numberLayerClass: 'introjs-helperNumberLayerBottomRight'
+					},
+					{
+						element: document.querySelector('.elgg-module-publish'),
+						intro: "The old 'something to share' box and publish menu have been combined into a single easy access toolbar."
+					},
+					{
+						element: document.querySelector('.spot-topbar-logo'),
+						intro: "Click here to go back to the home page."
+					},
+					{
+						element: document.querySelector('.elgg-feedback'),
+						intro: 'This major Spot update is part of a series of updates that are under development to help make Spot a more effective and enjoyable site for all of the TGS community.<br /><br />As always, if you have any comments suggestions or questions, please click here to provide instant feedback.',
+						position: 'right',
 						numberLayerClass: 'introjs-helperNumberLayerBottomRight'
 					}
 
