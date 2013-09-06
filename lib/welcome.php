@@ -90,6 +90,30 @@ function welcome_reset_dismissed($user = NULL) {
 }
 
 /**
+ * Reset a given users specific dismissed message
+ * 
+ * @param string name name of the message to dismiss
+ * @param ElggUser $user User to reset
+ * @return bool
+ */
+function welcome_reset_dismissed_by_name($name, $user = NULL) {
+	if (elgg_is_logged_in()) {
+		if (!elgg_instanceof($user, 'user')) {
+			$user = elgg_get_logged_in_user_entity();
+		}
+	
+		$messages = unserialize($user->welcome_dismissed);
+
+		if (array_key_exists($name, $messages)) {
+			unset($messages[$name]);
+			$user->welcome_dismissed = serialize($messages);
+			return $user->save();
+		}
+	}
+}
+
+
+/**
  * Reset wether a user has viewed the intro item
  */
 function welcome_reset_introitem($user = NULL) {

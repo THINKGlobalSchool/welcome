@@ -73,7 +73,6 @@ function welcome_init() {
 		elgg_load_js('intro.js');
 		elgg_load_css('intro.js');
 
-		// Topbar menu hook
 		elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	} 
 }
@@ -89,6 +88,13 @@ function welcome_pagesetup() {
 		//elgg_extend_view('parentportal/extend_left', 'welcome/parent_module');
 
 		$_SESSION['welcome_popup'] = TRUE;
+	}
+
+	//welcome_reset_dismissed_by_name('new_spot_tut');
+
+	// Fire off the new what's new tutorial
+	if (elgg_is_logged_in() && !welcome_is_message_dismissed('new_spot_tut')) {
+		elgg_extend_view('page/elements/topbar_ajax', 'welcome/new_spot_tut');
 	}
 }
 
@@ -126,17 +132,19 @@ function welcome_ecml_views_hook($hook, $entity_type, $return_value, $params) {
  * Hook into topbar menu hook and add a new tutorial button
  */
 function welcome_topbar_menu_handler($hook, $type, $items, $params) {
-	$tut_item = ElggMenuItem::factory(array(
-		'name' => 'nav_tut',
-		'href' => '#',
-		'link_class' => 'elgg-button elgg-button-delete welcome-nav-tutorial-start',
-		'text' => 'What\'s new?' . elgg_view('welcome/tut_js'), 
-		'priority' => 999999,
-	));
+	if (get_input('page_context') == 'home') {
+		$tut_item = ElggMenuItem::factory(array(
+			'name' => 'nav_tut',
+			'href' => '#',
+			'link_class' => 'elgg-button elgg-button-delete welcome-nav-tutorial-start',
+			'text' => 'What\'s new?' . elgg_view('welcome/tut_js'), 
+			'priority' => 999999,
+		));
 
-	$tut_item->setSection('default');
+		$tut_item->setSection('default');
 
-	$items[] = $tut_item;
+		$items[] = $tut_item;
+	}
 
 	return $items;
 }
