@@ -63,7 +63,8 @@
 					},
 					{
 						element: document.querySelector('.elgg-module-publish'),
-						intro: "The old 'something to share' box and publish menu have been combined into a single easy access toolbar."
+						intro: "The old 'something to share' box and publish menu have been combined into a single easy access toolbar.",
+						numberLayerClass: 'introjs-helperNumberLayerBottomRight'
 					},
 					{
 						element: document.querySelector('.spot-topbar-logo'),
@@ -71,7 +72,7 @@
 					},
 					{
 						element: document.querySelector('.elgg-feedback'),
-						intro: 'This major Spot update is part of a series of updates that are under development to help make Spot a more effective and enjoyable site for all of the TGS community.<br /><br />As always, if you have any comments suggestions or questions, please click here to provide instant feedback.',
+						intro: 'This major Spot update is the first in a series of updates that are under development to help make Spot a more effective and enjoyable site for all of the TGS community.<br /><br />As always, if you have any comments suggestions or questions, please click here to provide instant feedback.',
 						position: 'right',
 						numberLayerClass: 'introjs-helperNumberLayerBottomRight'
 					}
