@@ -73,7 +73,7 @@ function welcome_init() {
 		elgg_load_js('intro.js');
 		elgg_load_css('intro.js');
 
-		elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
+		//elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	} 
 }
 
@@ -94,7 +94,7 @@ function welcome_pagesetup() {
 
 	// Fire off the new what's new tutorial
 	if (elgg_is_logged_in() && !welcome_is_message_dismissed('new_spot_tut')) {
-		elgg_extend_view('page/elements/topbar_ajax', 'welcome/new_spot_tut');
+		//elgg_extend_view('page/elements/topbar_ajax', 'welcome/new_spot_tut');
 	}
 }
 

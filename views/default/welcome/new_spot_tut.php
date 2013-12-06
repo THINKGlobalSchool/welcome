@@ -17,9 +17,7 @@ welcome_dismiss_message('new_spot_tut');
 	fire_new_spot_tut = function() {
 		$(document).ready(function() {
 
-			if ($('.elgg-feedback').position().top > 800) {
-				$('.elgg-feedback').animate({top: '150px'});
-			}
+			$('.elgg-feedback').animate({top: '150px'});
 
 			setTimeout(function(){
 				$('.welcome-nav-tutorial-start').click();
