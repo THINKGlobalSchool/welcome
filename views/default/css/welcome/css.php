@@ -43,6 +43,18 @@
 	text-align: right;
 }
 
+.elgg-widget-instance-welcome ul.elgg-menu-widget {
+	float: right;
+}
+
+.elgg-menu-widget > li.elgg-menu-item-welcome-close {
+	float: left;
+	position: relative;
+	right: 6px;
+	top: 2px;
+	width: auto;
+}
+
 /** intro.js tutorial specific styles **/
 
 .elgg-menu-topbar li a.welcome-nav-tutorial-start {

@@ -5,7 +5,7 @@
  * @package Welcome
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2013
+ * @copyright THINK Global School 2010 - 2014
  * @link http://www.thinkglobalschool.com/
  * 
  */
@@ -47,6 +47,9 @@ function welcome_init() {
 	// Register the popup with ECML
 	elgg_register_plugin_hook_handler('get_views', 'ecml', 'welcome_ecml_views_hook');
 	
+	// Modify widget menu
+	elgg_register_plugin_hook_handler('register', 'menu:widget', 'welcome_widget_menu_setup', 501);
+
 	// Register JS
 	$welcome_js = elgg_get_simplecache_url('js', 'welcome/welcome');
 	elgg_register_simplecache_view('js/welcome/welcome');
@@ -60,6 +63,9 @@ function welcome_init() {
 	$i = elgg_get_simplecache_url('css', 'intro_js');
 	elgg_register_simplecache_view('css/intro_js');
 	elgg_register_css('intro.js', $i);
+
+	// Register welcome roles widget
+	elgg_register_widget_type('welcome', elgg_echo('welcome:widget:title'), elgg_echo('welcome:widget:desc'), 'rolewidget');
 
 	// Load lightbox CSS & JS
 	elgg_load_css('lightbox');
@@ -149,6 +155,31 @@ function welcome_topbar_menu_handler($hook, $type, $items, $params) {
 	return $items;
 }
 
+/**
+ * Modify widget menus for welcome role widget
+ */
+function welcome_widget_menu_setup($hook, $type, $return, $params) {
+	if (get_input('custom_widget_controls')) {
+		$widget = $params['entity'];
+
+		if ($widget->handler == 'welcome') {
+
+			$close_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/welcome/dismiss?name=checklist');
+
+			$options = array(
+				'name' => 'welcome_close',
+				'text' => 'Close',
+				'title' => 'welcome_close',
+				'href' => $close_url,
+				'class' => 'home-small'
+			);
+
+			$return[] = ElggMenuItem::factory($options);
+		}
+	}
+
+	return $return;
+}
+
 elgg_register_event_handler('init', 'system', 'welcome_init');
 elgg_register_event_handler('pagesetup', 'system', 'welcome_pagesetup');
-

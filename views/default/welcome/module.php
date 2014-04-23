@@ -52,7 +52,7 @@ if ($wire_posts) {
 }
 
 // If we're on the home page, use a different module
-if (elgg_in_context('home') || elgg_in_context('parentportal')) {
+if (elgg_in_context('home') || elgg_in_context('parentportal') || elgg_in_context('widgets')) {
 	$type = 'featured';
 	$close_text = 'Close&nbsp;<span class="elgg-icon elgg-icon-delete right"></span>';
 	$close_class = 'right';
@@ -112,7 +112,10 @@ foreach ($items as $item) {
 
 $content .= "</ol>";
 
-// Allow content to be extended
-$content .= elgg_view('welcome/module_extend');
-
-echo elgg_view_module($type, $header, $content, array('id' => 'welcome-sidebar'));
+if (!elgg_in_context('widgets')) {
+	// Allow content to be extended
+	$content .= elgg_view('welcome/module_extend');
+	echo elgg_view_module($type, $header, $content, array('id' => 'welcome-sidebar'));
+} else {
+	echo "<div id='welcome-sidebar'>{$content}</div>";
+}

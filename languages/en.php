@@ -35,7 +35,11 @@ $english = array(
 	'welcome:label:previewpopup_parent' => 'Preview Parent Popup',
 //	'welcome:label:welcomeparents' => 'Welcome to Spot',
 	'welcome:label:checklistdescription' => 'Checklist Description Text',
-	
+
+	// Welcome widget
+	'welcome:widget:title' => 'Welcome',
+	'welcome:widget:desc' => 'Welcome checklist widget',
+
 	// Messages
 	'welcome:error:dismiss' => 'There was an error dismissing this message',
 	'welcome:error:invalidintroentity' => 'Invalid or non-existant intro item entity. Double-check the welcome plugin settings.',
