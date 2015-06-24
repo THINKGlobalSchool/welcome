@@ -5,8 +5,8 @@
  * @package Welcome
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2014
- * @link http://www.thinkglobalschool.com/
+ * @copyright THINK Global School 2010 - 2015
+ * @link http://www.thinkglobalschool.org/
  * 
  */
 
@@ -65,7 +65,7 @@ function welcome_init() {
 	elgg_register_css('intro.js', $i);
 
 	// Register welcome roles widget
-	elgg_register_widget_type('welcome', elgg_echo('welcome:widget:title'), elgg_echo('welcome:widget:desc'), 'rolewidget');
+	elgg_register_widget_type('welcome', elgg_echo('welcome:widget:title'), elgg_echo('welcome:widget:desc'), array('rolewidget'));
 
 	// Load lightbox CSS & JS
 	elgg_load_css('lightbox');
@@ -171,7 +171,7 @@ function welcome_widget_menu_setup($hook, $type, $return, $params) {
 				'text' => 'Close',
 				'title' => 'welcome_close',
 				'href' => $close_url,
-				'class' => 'home-small'
+				'link_class' => 'home-small'
 			);
 
 			$return[] = ElggMenuItem::factory($options);

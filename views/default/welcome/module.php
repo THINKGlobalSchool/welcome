@@ -6,8 +6,8 @@
  * @package Welcome
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
- * @link http://www.thinkglobalschool.com/
+ * @copyright THINK Global School 2010 - 2015
+ * @link http://www.thinkglobalschool.org/
  * 
  */
 
@@ -64,7 +64,7 @@ if (elgg_in_context('home') || elgg_in_context('parentportal') || elgg_in_contex
 
 //@todo - dismiss via AJAX
 $close_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/welcome/dismiss?name=checklist');
-$close_link = elgg_view('output/confirmlink', array(
+$close_link = elgg_view('output/url', array(
 	'href' => $close_url,
 	'text' => $close_text,
 	'confirm' => elgg_echo('welcome:checklist:dismissconfirm'),
