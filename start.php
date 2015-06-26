@@ -76,8 +76,8 @@ function welcome_init() {
 		elgg_load_js('lightbox');
 		elgg_load_js('elgg.welcome');
 
-		elgg_load_js('intro.js');
-		elgg_load_css('intro.js');
+		// elgg_load_js('intro.js');
+		// elgg_load_css('intro.js');
 
 		//elgg_register_plugin_hook_handler('register', 'menu:topbar', 'welcome_topbar_menu_handler');
 	} 
